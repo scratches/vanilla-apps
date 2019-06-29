@@ -42,8 +42,7 @@ import org.springframework.transaction.interceptor.TransactionInterceptor;
  */
 @Configuration(proxyBeanMethods = false)
 @Import(AutoProxyRegistrar.class)
-// Trick the proxy creator into thinking this is @EnableTransactionManagement but without
-// the imports
+// Trick the proxy creator into thinking this is @EnableTransactionManagement but without the imports
 @EnableTx(mode = AdviceMode.PROXY, proxyTargetClass = false)
 public class SampleTransactionManagementConfiguration extends AbstractTransactionManagementConfiguration {
 
