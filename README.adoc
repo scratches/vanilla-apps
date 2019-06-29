@@ -1,0 +1,59 @@
+Benchmarks from a 1-entity JPA (not Spring Data) app:
+
+```
+class          method  profile sample  beans   classes    heap  memory  median  mean  range
+CompileBenchmark  main  demo   auto  139.000  7692.000  12.116  73.349  1.932  1.985  0.071
+CompileBenchmark  main  first  auto  139.000  8521.000  13.259  82.449  2.218  2.261  0.057
+SimpleBenchmark   main  demo   auto  139.000  8097.000  11.590  75.015  2.024  2.068  0.053
+SimpleBenchmark   main  first  auto  139.000  8925.000  12.647  83.957  2.314  2.344  0.033
+```
+
+"Compile" uses compile-time entity code generation (via the Maven plugin). It's about 100ms faster.
+
+100 entities:
+
+```
+class          method  profile sample  beans  classes     heap  memory  median  mean  range
+CompileBenchmark  main  demo   auto  139.000  7800.000  13.826  77.519  2.300  2.405  0.216
+CompileBenchmark  main  first  auto  139.000  8628.000  17.058  88.630  2.595  2.676  0.106
+SimpleBenchmark   main  demo   auto  139.000  8317.000  13.757  80.497  2.745  2.830  0.201
+SimpleBenchmark   main  first  auto  139.000  9144.000  15.220  89.918  3.005  3.079  0.106
+```
+
+I.e. about 400ms faster. So wildly extrapolating from 2 data points, that's about 3ms per entity.
+
+Interestingly, you get another 100ms from setting `hibernate.bytecode.provider=none` explicitly:
+
+```
+class           method profile sample  beans  classes     heap  memory  median  mean  range
+CompileBenchmark  main  demo   auto  139.000  7374.000  11.224  71.084  1.833  1.865  0.032
+CompileBenchmark  main  first  auto  139.000  8237.000  12.898  80.952  2.147  2.201  0.055
+```
+
+== Native Image
+
+```
+$ mvn clean install
+$ CP=`java -jar $HOME/.m2/repository/org/springframework/boot/experimental/spring-boot-thin-launcher/1.0.22.RELEASE/spring-boot-thin-launcher-1.0.22.RELEASE-exec.jar --thin.archive=target/orm-0.0.1.BUILD-SNAPSHOT.jar --thin.classpath`
+$ native-image --no-server -DremoveUnusedAutoconfig=true -Dio.netty.noUnsafe=true -H:+ReportExceptionStackTraces --no-fallback --allow-incomplete-classpath --report-unsupported-elements-at-runtime -H:Name=target/demo -cp target/classes/:$HOME/.m2/repository/org/springframework/spring-boot-graal-feature/0.5.0.BUILD-SNAPSHOT/spring-boot-graal-feature-0.5.0.BUILD-SNAPSHOT.jar:$CP app.main.SampleApplication
+$ ./target/demo
+Jun 28, 2019 7:35:28 AM com.fasterxml.jackson.databind.ext.Java7Support <clinit>
+WARNING: Unable to load JDK7 types (annotations, java.nio.file.Path): no Java7 support added
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                        
+
+Jun 28, 2019 7:35:28 AM org.springframework.boot.StartupInfoLogger logStarting
+INFO: Starting SampleApplication on tower with PID 20108 (started by dsyer in /home/dsyer/dev/demo/workspace/vanilla-orm)
+Jun 28, 2019 7:35:28 AM org.springframework.boot.SpringApplication logStartupProfileInfo
+...
+Jun 28, 2019 7:35:28 AM org.springframework.boot.web.embedded.netty.NettyWebServer start
+INFO: Netty started on port(s): 8080
+Jun 28, 2019 7:35:28 AM org.springframework.boot.StartupInfoLogger logStarted
+INFO: Started SampleApplication in 0.087 seconds (JVM running for 0.091)
+```
