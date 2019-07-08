@@ -16,6 +16,7 @@
 
 	<modules>
 		<module>vanilla-orm</module>
+		<module>vanilla-jpa</module>
 		<module>vanilla-tx</module>
 		<module>vanilla-thymeleaf</module>
 	</modules>
