@@ -16,41 +16,39 @@
 
 package hello;
 
-import static org.hamcrest.Matchers.containsString;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.reactive.server.WebTestClient;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers = GreetingController.class)
-public class ApplicationTest {
+@WebFluxTest(controllers = GreetingController.class)
+public class ApplicationTests {
 
-    @Autowired
-    private MockMvc mockMvc;
+	@Autowired
+	private WebTestClient client;
 
-    @Test
-    public void homePage() throws Exception {
-        // N.B. jsoup can be useful for asserting HTML content
-        mockMvc.perform(get("/index.html"))
-                .andExpect(content().string(containsString("Get your greeting")));
-    }
+	@Test
+	public void homePage() throws Exception {
+		// N.B. jsoup can be useful for asserting HTML content
+		client.get().uri("/index.html").exchange().expectBody(String.class).consumeWith(
+				content -> content.getResponseBody().contains("Get your greeting"));
+	}
 
-    @Test
-    public void greeting() throws Exception {
-        mockMvc.perform(get("/greeting"))
-                .andExpect(content().string(containsString("Hello, World!")));
-    }
+	@Test
+	public void greeting() throws Exception {
+		client.get().uri("/greeting").exchange().expectBody(String.class).consumeWith(
+				content -> content.getResponseBody().contains("Hello, World!"));
+	}
 
-    @Test
-    public void greetingWithUser() throws Exception {
-        mockMvc.perform(get("/greeting").param("name", "Greg"))
-                .andExpect(content().string(containsString("Hello, Greg!")));
-    }
+	@Test
+	public void greetingWithUser() throws Exception {
+		client.get().uri("/greeting?name={name}", "Greg").exchange()
+				.expectBody(String.class).consumeWith(
+						content -> content.getResponseBody().contains("Hello, Greg!"));
+	}
 
 }
