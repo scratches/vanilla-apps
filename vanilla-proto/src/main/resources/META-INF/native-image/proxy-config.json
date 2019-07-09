@@ -1,0 +1,4 @@
+[
+	["org.springframework.web.bind.annotation.ResponseStatus"],
+	["org.springframework.web.bind.annotation.RequestBody"]
+]

@@ -21,6 +21,7 @@
 		<module>vanilla-jpa</module>
 		<module>vanilla-tx</module>
 		<module>vanilla-thymeleaf</module>
+		<module>vanilla-proto</module>
 	</modules>
 
 	<properties>
