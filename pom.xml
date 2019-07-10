@@ -22,6 +22,7 @@
 		<module>vanilla-tx</module>
 		<module>vanilla-thymeleaf</module>
 		<module>vanilla-proto</module>
+		<module>vanilla-function</module>
 	</modules>
 
 	<properties>
