@@ -1,0 +1,27 @@
+[
+	{
+		"name": "org.springframework.cloud.function.web.StringConverter",
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	},
+	{
+		"name": "org.springframework.cloud.function.web.source.DestinationResolver",
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	},
+	{
+		"name": "org.springframework.web.bind.annotation.PostMapping",
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	},
+	{
+		"name": "org.springframework.web.bind.annotation.ResponseBody",
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	},
+	{
+		"name": "org.springframework.web.bind.annotation.RequestBody",
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	}
+]
