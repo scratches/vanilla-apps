@@ -23,6 +23,7 @@
 		<module>vanilla-thymeleaf</module>
 		<module>vanilla-proto</module>
 		<module>vanilla-function</module>
+		<module>vanilla-annotation</module>
 	</modules>
 
 	<properties>
