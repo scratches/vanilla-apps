@@ -7,7 +7,7 @@ COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
 RUN --mount=type=cache,target=${HOME}/.m2 ./mvnw dependency:get -Dartifact=org.springframework.boot.experimental:spring-boot-thin-launcher:1.0.22.RELEASE:jar:exec -Dtransitive=false
-RUN --mount=type=cache,target=${HOME}/.m2 ./mvnw dependency:get -Dartifact=org.springframework:spring-boot-graal-feature:0.5.0.BUILD-SNAPSHOT:jar -Dtransitive=false
+RUN --mount=type=cache,target=${HOME}/.m2 ./mvnw dependency:get -Dartifact=org.springframework.boot.experimental:spring-boot-graal-feature:0.5.0.BUILD-SNAPSHOT:jar -Dtransitive=false
 RUN --mount=type=cache,target=${HOME}/.m2 ./mvnw install -DskipTests
 VOLUME ${HOME}/.m2
 
