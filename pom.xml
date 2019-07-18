@@ -25,6 +25,7 @@
 		<module>vanilla-grpc</module>
 		<module>vanilla-function</module>
 		<module>vanilla-annotation</module>
+		<module>vanilla-rabbit</module>
 	</modules>
 
 	<properties>

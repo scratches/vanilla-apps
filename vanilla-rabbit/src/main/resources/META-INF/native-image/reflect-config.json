@@ -1,0 +1,62 @@
+[
+	{
+		"name": "org.springframework.amqp.core.Queue",
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	},
+	{
+		"name":"org.springframework.amqp.rabbit.annotation.RabbitListener",
+		"allDeclaredConstructors":true,
+		"allDeclaredMethods":true
+	},
+	{
+		"name": "org.springframework.amqp.rabbit.annotation.RabbitListenerAnnotationBeanPostProcessor",
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	},
+	{
+		"name": "org.springframework.amqp.rabbit.listener.RabbitListenerEndpointRegistry",
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	},
+	{
+		"name": "org.springframework.context.annotation.ConfigurationClassParser$DefaultDeferredImportSelectorGroup",
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	},
+	{
+		"name": "org.springframework.boot.autoconfigure.amqp.SimpleRabbitListenerContainerFactoryConfigurer",
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	},
+	{
+		"name": "org.springframework.boot.autoconfigure.amqp.DirectRabbitListenerContainerFactoryConfigurer",
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	},
+	{
+		"name": "org.springframework.amqp.rabbit.connection.CachingConnectionFactory",
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	},
+	{
+		"name": "org.springframework.amqp.core.AnonymousQueue",
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	},
+	{
+		"name": "org.springframework.amqp.core.AmqpAdmin",
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	},
+	{
+		"name": "app.main.model.Foo",
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	},
+	{
+		"name": "app.main.Receiver",
+		"allDeclaredConstructors": true,
+		"allDeclaredMethods": true
+	}
+]
